@@ -92,7 +92,8 @@ data_ranges=function(fs,global_across_samples,global_across_channels,na.rm=T){
 #' @note Since pdf files are vectorized, they can get really big if a lot of data point are plotted. This function thus used bitmap images that are stored in a temporary directory (tmpDir()) and then import them in a single pdf. If you're interested in using the bitmap images, you can fetch them in tmpDir()
 #' @export
 
-color_biplot_by_channels <- function(matrix,
+color_biplot_by_channels <- function(
+                                     matrix,
                                      x_axis,
                                      y_axis,
                                      global_across_channels=T,
@@ -105,7 +106,6 @@ color_biplot_by_channels <- function(matrix,
                                      ... #pass to plot for e.g. tSNE biplot
                                      )
 {
-
     sapply(c("png","raster","grid"),function(package){
         if(!require(package,character.only=T)){
             install.packages(pkgs=package)
@@ -123,7 +123,6 @@ color_biplot_by_channels <- function(matrix,
         rownames(data_range)=c("min","max")
     }
 
-
     x = matrix[,x_axis]
     y = matrix[,y_axis]
     xp = matrix[,regular_channels,drop=FALSE]
@@ -133,8 +132,8 @@ color_biplot_by_channels <- function(matrix,
         {
             color.scale=unique(colorRampPalette(palette)(1000))
             n=length(color.scale)
-            
-            breaks=seq(data.range["min",pname],data.range["max",pname],length.out=n+1)
+
+            breaks=unique(seq(data.range["min",pname],data.range["max",pname],length.out=n+1))
             if(length(unique(breaks))>1){
                 points.colors=as.character(cut(xp[,pname],breaks=breaks,labels=color.scale))
             } else {
@@ -185,17 +184,17 @@ color_biplot_by_channels <- function(matrix,
         }
         sapply(rasters,function(x){
             par("mar"=c(0,0,0,0))
+            grid.newpage()
+            label=sub(".png","",sub("mainplot_","",tail(strsplit(x$main.file,"/")[[1]],1),fixed=TRUE),fixed=TRUE)
+            
             if(!global_across_channels){
-                grid.newpage()
                 grid.raster(readPNG(x$main.file,native=T),y=0.6,height=0.8)
                 grid.raster(readPNG(x$scale.file,native=T),y=0.1,height=0.2)
             }
             if(global_across_channels){
-                par("mar"=c(0,0,0,0))
-                grid.newpage()
                 grid.raster(readPNG(x$main.file,native=T))
             }
-            grid.text(x=par("usr")[2],y=par("usr")[4],label=sub(".png","",sub("/mainplot_","",tail(strsplit(x$main.file,"/")[[1]],1),fixed=TRUE),fixed=TRUE),just=c(1,1),gp=gpar(col="white"))
+            grid.text(x=unit(1,"npc"),y=unit(1,"npc"),label=label,just=c(1,1),gp=gpar(col="white",cex=0.1))
             return(NULL)
         })
         dev.off()
