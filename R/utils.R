@@ -20,7 +20,10 @@ aggregate_df=function(df,groups,fun=mean,margin=1,...){
         }
         df=split(df,groups)
     } else if(is.matrix(df)){
-        df=split_matrix(df,groups,byrow=margin==1)
+        if(margin==2){
+            df=t(df)
+        }
+        df=split_matrix(df,groups,byrow=TRUE)
     }
     
     res=do.call(
@@ -143,7 +146,7 @@ writeClipboard <- function(x, sep="\t", row.names=FALSE, col.names=TRUE){
 #' Map a vector to colors (for categorical variables)
 #' @export
 toColors_discrete <- function(vector,palette=c("#8DD3C7","#FFFFB3","#BEBADA","#FB8072","#80B1D3","#FDB462","#B3DE69","#FCCDE5","#D9D9D9","#BC80BD","#CCEBC5","#FFED6F")){
-    n=unique(vector)
+    n=sort(unique(vector))
     setNames(colorRampPalette(palette)(length(n)),n)[as.character(vector)]
 }
 
