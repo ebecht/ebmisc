@@ -242,7 +242,10 @@ imageWrapper=function(matrixToPlot,labCol=colnames(matrixToPlot),labRow=rownames
     text(x=0,y=(nrow:1)-0.5,pos=2,labels=labRow,xpd=T,cex=cex.row,offset=0,adj=c(1,0.5))
     
     if(length(NAs)>0){
-        rect(ybottom=NAs[,"col"]-1,ytop=NAs[,"col"],xleft=NAs[,"row"]-1,xright=NAs[,"row"],col=na.col,border=F)
+        ## rect(ybottom=NAs[,"col"]+0.5,ytop=NAs[,"col"],xleft=NAs[,"row"]+0.5,xright=NAs[,"row"],col=na.col,border=NULL)
+        apply(NAs,1,function(x){
+            image(x[1]+0:1-1,x[2]+0:1-1,z=matrix(0),breaks=c(-0.5,0.5),col="black", add = TRUE)
+        })
     }
 }
 
