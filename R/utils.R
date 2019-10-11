@@ -168,7 +168,7 @@ toColors_continuous<-function(vector,palette=rev(c("#A50026","#D73027","#F46D43"
 
 #' Plot a 2D heatmap of frequencies using rectangular bins (a la FlowJo)
 #' @export
-freqplot=function(x,y,breaks=200,na.rm=TRUE,...){
+freqplot=function(x,y,breaks=200,na.rm=TRUE,palette = rev(c("#A50026","#D73027","#F46D43","#FDAE61","#FEE090","#FFFFBF","#E0F3F8","#ABD9E9","#74ADD1","#4575B4","#313695")), add_white=TRUE,...){
 
     w=is.na(x)|is.na(y)|is.nan(x)|is.nan(y)|is.infinite(x)|is.infinite(y)
     if(any(w)){
@@ -206,7 +206,12 @@ freqplot=function(x,y,breaks=200,na.rm=TRUE,...){
     }
     
     if(w.x&w.y){
-        image(tab,col=c("white",colorRampPalette(rev(c("#A50026","#D73027","#F46D43","#FDAE61","#FEE090","#FFFFBF","#E0F3F8","#ABD9E9","#74ADD1","#4575B4","#313695")))(100)),x=breaks.x,y=breaks.y,xaxt="n",yaxt="n",xlab="",ylab="",bty="n",...)
+        if(add_white){
+            null_color = "white"
+        } else {
+            null_color = NULL
+        }
+        image(tab,col=c(null_color,colorRampPalette(palette)(100)),x=breaks.x,y=breaks.y,xaxt="n",yaxt="n",xlab="",ylab="",bty="n",...)
         ticks=seq(0,1,by=0.25)
         axis(side=1,at=quantile(breaks.x,ticks),labels=signif(quantile(breaks.x,ticks),2),line=0.5)
         axis(side=2,at=quantile(breaks.y,ticks),labels=signif(quantile(breaks.y,ticks),2),line=0.5)
@@ -314,4 +319,15 @@ split_matrix=function(mat,vector,byrow=TRUE){
         })
     }
     res
+}
+
+#' faust:::tsGates wrapper
+#' @export
+tsGates=function(xVec, modePrior = 0L, maxElements = 10^4){
+    require(faust)
+    if(length(xVec) > maxElements){
+        xVec = xVec[sample(1:length(xVec), maxElements)]
+    }
+    xVec = sort(xVec)
+    faust:::tsGates(xVec, modePrior)
 }
