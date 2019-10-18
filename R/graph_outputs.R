@@ -244,7 +244,7 @@ imageWrapper=function(matrixToPlot,labCol=colnames(matrixToPlot),labRow=rownames
     if(length(NAs)>0){
         ## rect(ybottom=NAs[,"col"]+0.5,ytop=NAs[,"col"],xleft=NAs[,"row"]+0.5,xright=NAs[,"row"],col=na.col,border=NULL)
         apply(NAs,1,function(x){
-            image(x[1]+0:1-1,x[2]+0:1-1,z=matrix(0),breaks=c(-0.5,0.5),col="black", add = TRUE)
+            image(x[1]+0:1-1,x[2]+0:1-1,z=matrix(0),breaks=c(-0.5,0.5),col=na.col, add = TRUE)
         })
     }
 }
