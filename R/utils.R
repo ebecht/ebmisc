@@ -213,8 +213,12 @@ freqplot=function(x,y,breaks=200,na.rm=TRUE,palette = rev(c("#A50026","#D73027",
         }
         image(tab,col=c(null_color,colorRampPalette(palette)(100)),x=breaks.x,y=breaks.y,xaxt="n",yaxt="n",xlab="",ylab="",bty="n",...)
         ticks=seq(0,1,by=0.25)
-        axis(side=1,at=quantile(breaks.x,ticks),labels=signif(quantile(breaks.x,ticks),2),line=0.5)
-        axis(side=2,at=quantile(breaks.y,ticks),labels=signif(quantile(breaks.y,ticks),2),line=0.5)
+        if(par("xaxt") != "n"){
+            axis(side=1,at=quantile(breaks.x,ticks),labels=signif(quantile(breaks.x,ticks),2),line=0.5)
+        }
+        if(par("yaxt") != "n"){
+            axis(side=2,at=quantile(breaks.y,ticks),labels=signif(quantile(breaks.y,ticks),2),line=0.5)
+        }
     } else {
         if(!w.x){
             X=runif(length(x))
