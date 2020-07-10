@@ -4,9 +4,16 @@
 \alias{freqplot}
 \title{Plot a 2D heatmap of frequencies using rectangular bins (a la FlowJo)}
 \usage{
-freqplot(x, y, breaks = 200, na.rm = TRUE, palette = rev(c("#A50026",
-  "#D73027", "#F46D43", "#FDAE61", "#FEE090", "#FFFFBF", "#E0F3F8",
-  "#ABD9E9", "#74ADD1", "#4575B4", "#313695")), add_white = TRUE, ...)
+freqplot(
+  x,
+  y,
+  breaks = 200,
+  na.rm = TRUE,
+  palette = rev(c("#A50026", "#D73027", "#F46D43", "#FDAE61", "#FEE090", "#FFFFBF",
+    "#E0F3F8", "#ABD9E9", "#74ADD1", "#4575B4", "#313695")),
+  add_white = TRUE,
+  ...
+)
 }
 \description{
 Plot a 2D heatmap of frequencies using rectangular bins (a la FlowJo)

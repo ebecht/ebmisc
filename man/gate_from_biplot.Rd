@@ -4,8 +4,17 @@
 \alias{gate_from_biplot}
 \title{From a biplot let the user interactively draw polygons to create a "Gate" column in the expression data}
 \usage{
-gate_from_biplot(matrix, x_axis, y_axis, ..., bty = "l", pch = 16,
-  cex = 0.5, alpha = 100, sample = NULL)
+gate_from_biplot(
+  matrix,
+  x_axis,
+  y_axis,
+  ...,
+  bty = "l",
+  pch = 16,
+  cex = 0.5,
+  alpha = 100,
+  sample = NULL
+)
 }
 \arguments{
 \item{matrix}{A matrix}

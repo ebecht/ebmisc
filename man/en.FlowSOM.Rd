@@ -4,8 +4,15 @@
 \alias{en.FlowSOM}
 \title{FlowSOM wrapper to call on matrices}
 \usage{
-en.FlowSOM(mat, scale = FALSE, scaled.center = TRUE,
-  scaled.scale = TRUE, nClus = NULL, maxMeta, ...)
+en.FlowSOM(
+  mat,
+  scale = FALSE,
+  scaled.center = TRUE,
+  scaled.scale = TRUE,
+  nClus = NULL,
+  maxMeta,
+  ...
+)
 }
 \description{
 FlowSOM wrapper to call on matrices

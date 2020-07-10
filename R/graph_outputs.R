@@ -6,7 +6,7 @@
 #' @param fs A flowSet
 #' @param global_across_channels Boolean
 #' @param na.rm Boolean : wether to ignore missing values or change output to NA
-#' @details See \code{\link{color_biplots_by_channels}} for details of how the boolean arguments affect the output
+#' @details See \code{\link{color_biplot_by_channels}} for details of how the boolean arguments affect the output
 #' @export
 
 data_ranges=function(fs,global_across_samples,global_across_channels,na.rm=T){
@@ -135,7 +135,7 @@ color_biplot_by_channels <- function(
 
             breaks=unique(seq(data.range["min",pname],data.range["max",pname],length.out=n+1))
             if(length(unique(breaks))>1){
-                points.colors=as.character(cut(xp[,pname],breaks=breaks,labels=color.scale))
+                points.colors=as.character(cut(xp[,pname],breaks=breaks,labels=color.scale,include.lowest=TRUE))
             } else {
                 points.colors=rep("lightsteelblue",length(xp[,pname]))
             }

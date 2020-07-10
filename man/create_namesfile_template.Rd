@@ -4,8 +4,7 @@
 \alias{create_namesfile_template}
 \title{Create a 'names_template.csv' file from fcs files in the /fcs/config folder}
 \usage{
-create_namesfile_template(fs = fs_src,
-  path = "./config/names_template.csv")
+create_namesfile_template(fs = fs_src, path = "./config/names_template.csv")
 }
 \description{
 Create a 'names_template.csv' file from fcs files in the /fcs/config folder

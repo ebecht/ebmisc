@@ -4,9 +4,11 @@
 \alias{toColors_continuous_fromRank}
 \title{Map a vector to colors (for continuous variables); old version}
 \usage{
-toColors_continuous_fromRank(vector, palette = rev(c("#A50026",
-  "#D73027", "#F46D43", "#FDAE61", "#FEE090", "#FFFFBF", "#E0F3F8",
-  "#ABD9E9", "#74ADD1", "#4575B4", "#313695")))
+toColors_continuous_fromRank(
+  vector,
+  palette = rev(c("#A50026", "#D73027", "#F46D43", "#FDAE61", "#FEE090", "#FFFFBF",
+    "#E0F3F8", "#ABD9E9", "#74ADD1", "#4575B4", "#313695"))
+)
 }
 \description{
 Map a vector to colors (for continuous variables); old version

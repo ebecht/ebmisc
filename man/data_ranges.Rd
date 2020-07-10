@@ -17,5 +17,5 @@ data_ranges(fs, global_across_samples, global_across_channels, na.rm = T)
 Computes data ranges for each channel of each flowFrame of a flowSet
 }
 \details{
-See \code{\link{color_biplots_by_channels}} for details of how the boolean arguments affect the output
+See \code{\link{color_biplot_by_channels}} for details of how the boolean arguments affect the output
 }

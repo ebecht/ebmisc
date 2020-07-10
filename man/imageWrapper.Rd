@@ -4,9 +4,16 @@
 \alias{imageWrapper}
 \title{Wrapper to image where the coordinate system is more intuitive}
 \usage{
-imageWrapper(matrixToPlot, labCol = colnames(matrixToPlot),
-  labRow = rownames(matrixToPlot), ..., cex.text = 1, cex.row = 1,
-  cex.col = 1, na.col = par("bg"))
+imageWrapper(
+  matrixToPlot,
+  labCol = colnames(matrixToPlot),
+  labRow = rownames(matrixToPlot),
+  ...,
+  cex.text = 1,
+  cex.row = 1,
+  cex.col = 1,
+  na.col = par("bg")
+)
 }
 \arguments{
 \item{matrixToPlot}{A matrix with two dimensions}

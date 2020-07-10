@@ -277,7 +277,11 @@ eb.autolgcl=function(x){
     t=max(x)
     m=4.5
     q=0.05
-    r=.Machine$double.eps + quantile(x,q)
+    w_neg = x < 0
+    if(!any(w_neg)){
+        w_neg = rep(TRUE, length(w_neg))
+    }
+    r=.Machine$double.eps + quantile(x[w_neg], q)
     w=max((m-log10(t/abs(r)))/2,0.1)
     a=0
     logicleTransform(w=w,t=t,m=m,a=a) ##Just use summary() to retrive the parameters
