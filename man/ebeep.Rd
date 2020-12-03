@@ -2,10 +2,10 @@
 % Please edit documentation in R/not_for_sharing.R
 \name{ebeep}
 \alias{ebeep}
-\title{Beeps from FHCRC cluster}
+\title{Beep}
 \usage{
 ebeep(msg = "Work complete")
 }
 \description{
-Beeps from FHCRC cluster
+Beep
 }
