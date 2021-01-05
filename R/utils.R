@@ -339,3 +339,31 @@ tsGates=function(xVec, modePrior = 0L, maxElements = 10^4){
     xVec = sort(xVec)
     faust:::tsGates(xVec, modePrior)
 }
+
+#' @export
+QN<-function(lov){ ##works on a list of vectors - ie intensity of
+        w.n=which.max(sapply(lov,length))
+        n=length(lov[[w.n]])
+        o=lapply(lov,order)
+        or=lapply(o,order)
+
+        lov=lapply(1:length(lov),function(x)lov[[x]][o[[x]]])
+        lov.interpolated=lapply(lov,approx,n=n)
+        lov.interpolated=lapply(lov.interpolated,function(x)x$y)
+        lov.interpolated=do.call(cbind,lov.interpolated)
+
+        require(preprocessCore)
+        res=normalize.quantiles(lov.interpolated)
+        lapply(1:length(lov),function(i){
+            unname(quantile(res[,i],seq(0,1,length.out=length(lov[[i]])))[or[[i]]])
+        })
+    }
+
+#' @export
+QN.xp<-function(xp_mat,groups){ ## xp_mat = concatenated expression matrices, groups = vector of length nrow(xp_mat) that specifices which rows correspond to individuals
+    o=order(unlist(split(1:nrow(xp_mat),groups),use.names=FALSE))
+    apply(xp_mat,2,function(x){
+        unlist(QN(split(x,groups)))[o]
+    })
+}
+
