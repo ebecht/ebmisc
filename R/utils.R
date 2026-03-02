@@ -204,6 +204,10 @@ freqplot=function(x,y,breaks=200,na.rm=TRUE,palette = rev(c("#A50026","#D73027",
         plot.new()
         return(tab)
     }
+    if(length(x)==1&length(y)==1){
+        plot.new()
+        return(tab)
+    }
     
     if(w.x&w.y){
         if(add_white){
